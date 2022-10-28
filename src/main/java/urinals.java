@@ -71,6 +71,7 @@ public class urinals {
                     if(this.goodString(strArray)) {
                         System.out.println("The input string is good : "+ str);
                         int result = this.checkUrinals(strArray);
+                        System.out.println(result + " urinals are free for input string : "+ str);
                         fw.write(Integer.toString(result));
                     }
                     else {
