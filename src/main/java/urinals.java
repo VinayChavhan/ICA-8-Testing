@@ -45,16 +45,13 @@ public class urinals {
     //Check input size, the size should be greater than 1 and less than equal to 20
     public boolean countUrinals(String urinals) {
         int n = urinals.length();
-        if(n > 20 || n < 1)
-            return false;
-        return true;
+        return n <= 20 && n >= 1;
     }
 
     //Read the urinla.dat file and call other functions and write the output in rule<x>.txt
-    public void initiate_process()
-    {
+    public void initiate_process(String filename) throws IOException {
         try {
-            DataInputStream input = new DataInputStream(new FileInputStream("urinal.dat"));
+            DataInputStream input = new DataInputStream(new FileInputStream(filename));
             File outFile = new File("rule.txt");
             int i = 0;
             while(outFile.exists())
@@ -91,17 +88,18 @@ public class urinals {
         }
         catch (FileNotFoundException e)
         {
-            System.out.println(e);
+            System.out.println(e.getMessage());
+            throw new IOException("File is not present");
         }
         catch (Exception e)
         {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
     //Main function to start process
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         urinals myobj = new urinals();
-        myobj.initiate_process();
+        myobj.initiate_process("urinal.dat");
     }
 }
