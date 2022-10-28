@@ -4,6 +4,7 @@ import java.io.*;
 public class urinals {
 
 
+    //Main logic , get string array and check the number of urinals free
     public int checkUrinals(char[] strArray)
     {
         int count = 0;
@@ -29,6 +30,8 @@ public class urinals {
         }
         return count;
     }
+
+    //Check wheather we have right input or not, input should not contain any character other than 0 and 1
     public boolean goodString(char[] strArray)
     {
         for(int i=1; i<strArray.length; i++)
@@ -38,6 +41,8 @@ public class urinals {
         }
         return true;
     }
+
+    //Check input size, the size should be greater than 1 and less than equal to 20
     public boolean countUrinals(String urinals) {
         int n = urinals.length();
         if(n > 20 || n < 1)
@@ -45,10 +50,11 @@ public class urinals {
         return true;
     }
 
-    public static void main(String args[]) {
+    //Read the urinla.dat file and call other functions and write the output in rule<x>.txt
+    public void initiate_process()
+    {
         try {
-            DataInputStream input = new DataInputStream(new FileInputStream(
-                    "urinal.dat"));
+            DataInputStream input = new DataInputStream(new FileInputStream("urinal.dat"));
             File outFile = new File("rule.txt");
             int i = 0;
             while(outFile.exists())
@@ -59,13 +65,12 @@ public class urinals {
             FileWriter fw=new FileWriter(i == 0 ? "rule.txt" : "rule"+i+".txt",true);
             while (input.available() > 0) {
                 String str = input.readLine();
-                urinals myobj = new urinals();
-                if(myobj.countUrinals(str)) {
+                if(this.countUrinals(str)) {
                     System.out.println("The input string "+ str + " length is correct ");
                     char[] strArray = str.toCharArray();
-                    if(myobj.goodString(strArray)) {
+                    if(this.goodString(strArray)) {
                         System.out.println("The input string is good : "+ str);
-                        int result = myobj.checkUrinals(strArray);
+                        int result = this.checkUrinals(strArray);
                         fw.write(Integer.toString(result));
                     }
                     else {
@@ -91,6 +96,11 @@ public class urinals {
         {
             System.out.println(e);
         }
+    }
 
+    //Main function to start process
+    public static void main(String args[]) {
+        urinals myobj = new urinals();
+        myobj.initiate_process();
     }
 }
