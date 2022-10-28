@@ -1,6 +1,9 @@
 
 import java.io.*;
 
+/*
+Author : Vinay Chavhan
+ */
 public class urinals {
 
 
@@ -49,7 +52,7 @@ public class urinals {
     }
 
     //Read the urinla.dat file and call other functions and write the output in rule<x>.txt
-    public void initiate_process(String filename) throws IOException {
+    public void initiate_process(String filename) throws FileNotFoundException {
         try {
             DataInputStream input = new DataInputStream(new FileInputStream(filename));
             File outFile = new File("rule.txt");
@@ -89,7 +92,7 @@ public class urinals {
         catch (FileNotFoundException e)
         {
             System.out.println(e.getMessage());
-            throw new IOException("File is not present");
+            throw new FileNotFoundException("File is not present");
         }
         catch (Exception e)
         {
@@ -98,7 +101,7 @@ public class urinals {
     }
 
     //Main function to start process
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws FileNotFoundException {
         urinals myobj = new urinals();
         myobj.initiate_process("urinal.dat");
     }
